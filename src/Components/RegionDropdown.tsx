@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function RegionDropwdown() {
+export default React.memo(function RegionDropwdown() {
+  console.log("RegionDropdown");
   return (
     <>
       <div className="w-56 mt-8 relative text-left">
@@ -74,4 +75,4 @@ export default function RegionDropwdown() {
       </div>
     </>
   );
-}
+});

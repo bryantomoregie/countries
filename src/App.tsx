@@ -11,6 +11,7 @@ import { v4 as uuid } from "uuid";
 import Fuse from "fuse.js";
 
 function App() {
+  console.log("App");
   const [countries, setCountries] = useState<any>();
   const [searchValue, setSearchValue] = useState<string>("");
 

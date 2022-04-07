@@ -4,13 +4,15 @@ interface CountryInputFieldProps {
   setSearchValue: (value: string) => void;
 }
 
-export default function CountryInputField({
+export default React.memo(function CountryInputField({
   setSearchValue,
 }: CountryInputFieldProps) {
   const { theme } = useTheme();
   const handleChange = (value: string) => {
     setSearchValue(value);
   };
+
+  console.log("CountryInputField");
   return (
     <input
       className={`h-14 md:w-1/2 xl:w-1/3 mt-8 pl-4 drop-shadow-md rounded-md ${theme.foreground} ${theme.text}`}
@@ -19,4 +21,4 @@ export default function CountryInputField({
       onChange={(e) => handleChange(e.target.value)}
     />
   );
-}
+});

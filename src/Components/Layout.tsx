@@ -3,15 +3,9 @@ import { useTheme } from "../utils/ThemeProvider";
 
 interface LayoutProps {
   children: any;
-  // themeValue: string;
-  // updateTheme: (theme: string) => void;
 }
 
-export default function Layout({
-  children,
-}: // themeValue,
-// updateTheme,
-LayoutProps) {
+export default React.memo(function Layout({ children }: LayoutProps) {
   const { theme, setThemeValue, themeValue } = useTheme();
 
   const handleClick = () => {
@@ -25,7 +19,7 @@ LayoutProps) {
         className={`flex justify-between py-8 px-8 md:px-16 xl:px-28 shadow-2xl ${theme.foreground} ${theme.text}`}
       >
         <h1 className="text-2xl font-bold">Where in the world?</h1>
-        <div className="flex gap-3" onClick={handleClick}>
+        <div className="flex gap-3 cursor-pointer" onClick={handleClick}>
           {themeValue === "Dark" ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,4 +56,4 @@ LayoutProps) {
       {children}
     </div>
   );
-}
+});
