@@ -1,28 +1,28 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import { useTheme } from "../utils/ThemeProvider";
 
 interface LayoutProps {
   children: any;
-  themeValue: string;
-  updateTheme: (theme: string) => void;
+  // themeValue: string;
+  // updateTheme: (theme: string) => void;
 }
 
 export default function Layout({
   children,
-  themeValue,
-  updateTheme,
-}: LayoutProps) {
-  const { foreground, text } = useTheme();
+}: // themeValue,
+// updateTheme,
+LayoutProps) {
+  const { theme, setThemeValue, themeValue } = useTheme();
 
   const handleClick = () => {
     const newTheme = themeValue === "Dark" ? "Light" : "Dark";
-    updateTheme(newTheme);
+    setThemeValue(newTheme);
   };
 
   return (
     <div>
       <header
-        className={`flex justify-between py-8 px-8 md:px-16 xl:px-28 shadow-2xl ${foreground} ${text}`}
+        className={`flex justify-between py-8 px-8 md:px-16 xl:px-28 shadow-2xl ${theme.foreground} ${theme.text}`}
       >
         <h1 className="text-2xl font-bold">Where in the world?</h1>
         <div className="flex gap-3" onClick={handleClick}>

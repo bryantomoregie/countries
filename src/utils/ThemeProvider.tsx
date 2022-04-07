@@ -1,25 +1,33 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-export const themes = {
-  Light: {
-    foreground: "bg-white",
-    background: "bg-slate-100",
-    text: "text-black",
-  },
-  Dark: {
-    foreground: "bg-slate-700",
-    background: "bg-slate-800",
-    text: "text-white",
-  },
-};
+const ThemeContext = createContext<{
+  theme: { foreground: string; background: string; text: string };
+  setThemeValue: React.Dispatch<React.SetStateAction<string>>;
+  themeValue: string;
+}>(
+  // @ts-ignore
+  null
+);
 
-const ThemeContext = createContext(themes.Dark);
+export function ThemeProvider({ children }: any) {
+  const themes = {
+    Light: {
+      foreground: "bg-white",
+      background: "bg-slate-100",
+      text: "text-black",
+    },
+    Dark: {
+      foreground: "bg-slate-700",
+      background: "bg-slate-800",
+      text: "text-white",
+    },
+  };
+  const [themeValue, setThemeValue] = useState<string>("Dark");
 
-export function ThemeProvider({ children, themeValue }: any) {
+  const theme = themeValue === "Dark" ? themes.Dark : themes.Light;
+
   return (
-    <ThemeContext.Provider
-      value={themeValue === "Dark" ? themes.Dark : themes.Light}
-    >
+    <ThemeContext.Provider value={{ theme, setThemeValue, themeValue }}>
       {children}
     </ThemeContext.Provider>
   );
