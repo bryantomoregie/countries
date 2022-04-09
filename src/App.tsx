@@ -11,9 +11,9 @@ import { v4 as uuid } from "uuid";
 import Fuse from "fuse.js";
 
 function App() {
-  console.log("App");
   const [countries, setCountries] = useState<any>();
   const [searchValue, setSearchValue] = useState<string>("");
+  const [regionValue, setRegionValue] = useState<string>("");
 
   useEffect(() => {
     axios
@@ -26,12 +26,19 @@ function App() {
       threshold: 0.6,
       keys: ["name"],
     });
-
-    if (searchValue === "") return countries;
+    if (searchValue === "") {
+      if (regionValue === "") {
+        return countries;
+      }
+      return countries.filter((country: any) => country.region === regionValue);
+    }
 
     const results = fuseName.search(searchValue);
-    return results.map((result) => result.item);
-  }, [countries, searchValue]);
+
+    return results
+      .map((result) => result.item)
+      .filter((country: any) => country.region === regionValue);
+  }, [countries, regionValue, searchValue]);
 
   const { theme } = useTheme();
 
@@ -42,7 +49,10 @@ function App() {
       >
         <div className="flex justify-between flex-col md:flex-row">
           <CountryInputField setSearchValue={setSearchValue} />
-          <RegionDropwdown />
+          <RegionDropwdown
+            regionValue={regionValue}
+            setRegionValue={setRegionValue}
+          />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:gap-24 justify-center">
           {filteredCountries?.map((country: any) => {

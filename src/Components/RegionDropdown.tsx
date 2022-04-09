@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import { useTheme } from "../utils/ThemeProvider";
 
-export default React.memo(function RegionDropwdown() {
+interface RegionDropDownProps {
+  setRegionValue: (filter: string) => void;
+  regionValue: string;
+}
+
+export default React.memo(function RegionDropwdown({
+  setRegionValue,
+  regionValue,
+}: RegionDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { theme } = useTheme();
+
+  const handleFilterChange = (filter: string) => {
+    setRegionValue(filter);
+  };
 
   return (
     <>
@@ -17,7 +29,7 @@ export default React.memo(function RegionDropwdown() {
             aria-haspopup="true"
             onClick={() => setIsOpen(!isOpen)}
           >
-            Filter by Region
+            {regionValue === "" ? "Filter by Region" : regionValue}
             <svg
               className="-mr-1 ml-2 h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +58,7 @@ export default React.memo(function RegionDropwdown() {
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}
               role="menuitem"
               id="menu-item-0"
+              onClick={() => handleFilterChange("Africa")}
             >
               Africa
             </div>
@@ -53,6 +66,7 @@ export default React.memo(function RegionDropwdown() {
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}
               role="menuitem"
               id="menu-item-1"
+              onClick={() => handleFilterChange("America")}
             >
               America
             </div>
@@ -60,20 +74,23 @@ export default React.memo(function RegionDropwdown() {
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}
               role="menuitem"
               id="menu-item-2"
+              onClick={() => handleFilterChange("Asia")}
             >
               Asia
             </div>
             <div
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}
               role="menuitem"
-              id="menu-item-2"
+              id="menu-item-3"
+              onClick={() => handleFilterChange("Europe")}
             >
               Europe
             </div>
             <div
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}
               role="menuitem"
-              id="menu-item-2"
+              id="menu-item-4"
+              onClick={() => handleFilterChange("Oceania")}
             >
               Oceania
             </div>
