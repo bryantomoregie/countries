@@ -10,7 +10,6 @@ const ThemeContext = createContext<{
 );
 
 export function ThemeProvider({ children }: any) {
-  console.log("themeprovider");
   const themes = {
     Light: {
       foreground: "bg-white",

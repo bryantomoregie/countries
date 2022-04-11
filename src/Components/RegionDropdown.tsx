@@ -66,9 +66,9 @@ export default React.memo(function RegionDropwdown({
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}
               role="menuitem"
               id="menu-item-1"
-              onClick={() => handleFilterChange("America")}
+              onClick={() => handleFilterChange("Americas")}
             >
-              America
+              Americas
             </div>
             <div
               className={`${theme.foreground} ${theme.text} block px-4 py-2 text-sm`}

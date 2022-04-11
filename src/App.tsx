@@ -35,6 +35,10 @@ function App() {
 
     const results = fuseName.search(searchValue);
 
+    if (regionValue === "") {
+      return results.map((result) => result.item);
+    }
+
     return results
       .map((result) => result.item)
       .filter((country: any) => country.region === regionValue);
